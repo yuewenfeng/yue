@@ -1,53 +1,55 @@
 
  右键打开  :   git bash here
 
-	1.命令行输入:  git init  就成功初始化了一个仓库
+    1.命令行输入:  git init  就成功初始化了一个仓库
 
-	2.配置全局用户名 命令 git config --global user.name 'klxin'
+    2.配置全局用户名 命令 git config --global user.name 'klxin'
 
-	3.配置全局用户邮箱 git config --global user.email 'xinkailun@itcast.com'
+    3.配置全局用户邮箱 git config --global user.email 'xinkailun@itcast.com'
 
-	4.删除配置的用户名和邮箱 git config --global --unset user.name
+    4.删除配置的用户名和邮箱 git config --global --unset user.name
 
-	5.我们每次都git add 和git commit 操作2次是不是很麻烦？？
+
+
+    5.我们每次都git add 和git commit 操作2次是不是很麻烦？？
 将上述2步合并到一起git commit --all -m '提交信息说明'all 表示是把所有修改的文件提交到版本库
 
-	6.创建一个.gitignore文件  在文件里写的路径,可以忽略被写路径的 文件,   一行写一个文件路径  必须先提交一次忽略文件.gitignore
+    6.创建一个.gitignore文件  在文件里写的路径,可以忽略被写路径的 文件,   一行写一个文件路径  必须先提交一次忽略文件.gitignore
 如:   /js      忽略js文件夹 里所有文件
        /js*.*js    忽略 js文件夹里面全部以.js为后缀名的文件
        /js/indes.js    忽略js文件夹里  indes.js 的文件
 
-	7.git 查看日志 
+    7.git 查看日志
 
 命令git log 列出git全部提交日志
 命令git log --oneline列出简洁版的日志
 命令git log -3展示最近3条日志(了解)
 命令git reflog以查看所有分支的所有操作记录
 
-	8.回退到最近保存的一次代码 (0表示到上一次保存的状态1表示上上次以此类推)
-	$ git resrt --hard Head~0
+    8.回退到最近保存的一次代码 (0表示到上一次保存的状态1表示上上次以此类推)
+    $ git resrt --hard Head~0
 
 
-	9.退回到指定版本号的位置 (如果没有版本号信息 可以通过查看日志调出以前的版本号信息)
-	$ git resrt --hard 版本号信息
+    9.退回到指定版本号的位置 (如果没有版本号信息 可以通过查看日志调出以前的版本号信息)
+    $ git resrt --hard 版本号信息
 
-	10. git创建分支，切换分支，查看分支，合并分支
+    10. git创建分支，切换分支，查看分支，合并分支
 
 查看分支 命令 git branch  前面有*号 的分支 是当前在的分支
 命令git branch (分支名字) 新建一个分支
 命令git branch -d (分支名字) 删除一个分支   在当前分支 自己不能删除自己
 git checkout dev切换分子到dev
 
-	11.git合并分支时，手动处理冲突(重要)
-	
-	git merge dev  
-	合并分支内容,把当前分支与指定分支(dev)合并.   merge(合并的意思)
+    11.git合并分支时，手动处理冲突(重要)
+
+    git merge dev
+    合并分支内容,把当前分支与指定分支(dev)合并.   merge(合并的意思)
 
 切换到要合并到哪里的分支，通常都是合并到master
 执行命令git merge 要合并的分支名字如git merge dev
 合并过程中如果有冲突，在解决冲突后再提交
 
-	12.git pull,及git clone 得到服务器的仓储
+    12.git pull,及git clone 得到服务器的仓储
 一般主要用克隆   git clong (在GitHub网站复制的文件码)
 
 https的push到仓库方法 git push https仓库地址 master
@@ -55,3 +57,26 @@ https的pull到仓库方法 git pull https仓库地址 master
 ssh的推送git push origin master提交本地代码到远程仓库
 ssh的推送下拉git pull origin master从远程仓库拉去最新代码
 git clone 仓库名字从远程的仓库克隆到本地(要配置密钥)
+
+
+
+SSH
+
+1.ssh方式上传代码
+公钥,私钥,两者之间是有关联的
+
+生成公钥,私钥
+$ ssh-keygen -t rsa -C "邮箱地址"     注意C是大写
+在电脑 用户里 找到 ssh文件  复制  钥匙 去GitHub添加
+
+
+ 必须先pull拿到文件  再push上传文件 防止冲突  **
+2.上传到GitHub 操作
+    git add ./ 上传该仓库里所有文件
+    git commit -m "对该文件的描述"
+    git push (ssh仓库码) master
+
+3.把代码从GitHub拉到本地上来
+    git pull (ssh仓库码) master
+
+    可以直接用克隆方法来拉代码   git clone SSH码   (主要用这个方法)***
